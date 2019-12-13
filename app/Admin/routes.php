@@ -11,6 +11,6 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index')->name('admin.home');
-    $router->get('test', 'HomeController@test')->name('admin.test');
+    $router->resource('/article_category', ArticleCategoryController::class);
     $router->resource('/article', ArticleController::class);
 });
