@@ -2,6 +2,7 @@
 
 return [
     'online'                => '在线',
+    'zuozuan'               => '左钻',
     'login'                 => '登录',
     'logout'                => '登出',
     'setting'               => '设置',

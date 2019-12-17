@@ -3,7 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\ArticleCategory;
+use App\Models\ArticleCategory;
 use Encore\Admin\Form;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
@@ -21,7 +21,7 @@ class ArticleCategoryController extends Controller
             $content->body(ArticleCategory::tree(function ($tree) {
                 $tree->branch(function ($branch) {
                     $state = $branch['state'] == 0 ? "关闭" :"启用";
-                    return "{$branch['id']} - {$branch['name']} ( 是否开启：$state)";
+                    return " {$branch['name']} ( 是否开启：$state)";
                 });
             }));
         });
@@ -29,14 +29,17 @@ class ArticleCategoryController extends Controller
     protected function form()
     {
         $form = new Form(new ArticleCategory);
-
-        $form->text('pid','父级id');
+        $list = [
+            1=>"左巷",
+            2=>"故事",
+            3=>"记录",
+        ];
+        $form->select('pid','父级名称')->options($list);
         $form->text('name','名称');
         $form->number('sort', '排序');
         $form->switch('state', '显示开启');
         $form->display('created_at', '创建时间');
         $form->display('updated_at', '修改时间');
-
         return $form;
     }
     public function create(Content $content)
@@ -45,5 +48,12 @@ class ArticleCategoryController extends Controller
             ->header('作品分类')
             ->description('创建一个作品分类')
             ->body($this->form());
+    }
+    public function edit($id, Content $content)
+    {
+        return $content
+            ->header('Edit')
+            ->description('description')
+            ->body($this->form()->edit($id));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Encore\Admin\Traits\AdminBuilder;
 use Encore\Admin\Traits\ModelTree;
@@ -10,7 +10,6 @@ class ArticleCategory extends Model
 {
     use ModelTree, AdminBuilder;
     protected $table = 'article_category';
-    public $timestamps = false;
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
@@ -18,5 +17,8 @@ class ArticleCategory extends Model
         $this->setParentColumn('pid');
         $this->setOrderColumn('sort');
         $this->setTitleColumn('name');
+    }
+    public function getFaList(){
+        $list = App\ArticleCategory::all();
     }
 }

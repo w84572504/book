@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
         return $content
             ->title('首页')
-            ->description('首页描述')
+            ->description('展示当前系统中的统计数据、统计报表及重要实时数据')
             ->row(Dashboard::title())
             ->row(function (Row $row) {
 

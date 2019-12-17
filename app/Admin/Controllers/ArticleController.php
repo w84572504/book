@@ -6,7 +6,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-use App\Article;
+use App\Models\Article;
 
 class ArticleController extends AdminController
 {
