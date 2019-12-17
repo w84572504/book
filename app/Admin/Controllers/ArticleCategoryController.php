@@ -9,6 +9,7 @@ use Encore\Admin\Facades\Admin;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Controllers\ModelForm;
 use Encore\Admin\Tree;
+use Illuminate\Support\Facades\DB;
 
 class ArticleCategoryController extends Controller
 {
@@ -29,12 +30,12 @@ class ArticleCategoryController extends Controller
     protected function form()
     {
         $form = new Form(new ArticleCategory);
-        $list = [
-            1=>"左巷",
-            2=>"故事",
-            3=>"记录",
-        ];
-        $form->select('pid','父级名称')->options($list);
+        $list = DB::table('article_category')->select(['id','name'])->where("pid",0)->get()->toArray(); 
+        $arr =[];
+        foreach ($list as $key => $value) {
+            $arr[$value->id] = $value->name;
+        } 
+        $form->select('pid','父级名称')->options($arr);
         $form->text('name','名称');
         $form->number('sort', '排序');
         $form->switch('state', '显示开启');

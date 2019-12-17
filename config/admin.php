@@ -31,7 +31,7 @@ return [
     | 当左侧边栏收起时显示的小logo，也可以设置为html标签
     |
     */
-    'logo-mini' => '<b>Zx</b>',
+    'logo-mini' => '<img src="/upload/images/logo.png" width=30 alt="左巷">',
 
     /*
     |--------------------------------------------------------------------------
@@ -388,6 +388,10 @@ return [
     |
     */
     'extensions' => [
+        'chartjs' => [
 
+            // Set to `false` if you want to disable this extension
+            'enable' => true,
+        ]
     ],
 ];

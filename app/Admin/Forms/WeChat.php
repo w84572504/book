@@ -13,7 +13,7 @@ class WeChat extends Form
      *
      * @var string
      */
-    public $title = '微信配置';
+    public $title = '微信支付配置';
 
     /**
      * Handle the form request.
@@ -51,7 +51,8 @@ class WeChat extends Form
     {
         $this->text('app_id','公众号的appid')->rules('required');
         $this->text('app_secret','公众号的secret')->rules('required');
-        $this->text('key','微信商户支付的密钥')->rules('required'); 
+        $this->text('mc_id','商户id')->rules('required');
+        $this->text('key','微信商户支付的密钥')->rules('required');
         $this->text('notify_url','回调地址')->rules('required');  
         $this->file('apiclient_cert','证书文件')->rules('required');  
         $this->file('apiclient_key','密钥文件')->rules('required'); 
