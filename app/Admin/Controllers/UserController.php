@@ -45,7 +45,8 @@ class UserController extends Controller
     public function create(Content $content)
     {
         return $content
-            ->header('用户管理')
+            ->header('创建用户')
+            ->withWarning('注意', '手动创建用户并不能关联微信用户，只可以在浏览器中使用！')
             ->body($this->form());
     }
 
@@ -88,17 +89,10 @@ class UserController extends Controller
 
         $show = new Show(User::findOrFail($id));
 
-        $show->id('编号');
-        $show->username('姓名');
-       
-        $show->is_pass('审核状态')->as(function ($item){
-            $table = [
-                0 => '未审核',
-                1 => '通过',
-                2 => '拒绝'
-            ];
-            return $table[$item];
-        });
+        $show->invest_uid("邀请人id");
+        $show->phone("手机号");
+        $show->wx_name("微信名");
+        $show->score("左钻");
        
         return $show;
     }
@@ -110,19 +104,11 @@ class UserController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new User);
-
-        $form->display('id', '编号')->with(function ($id){
-            return sprintf('%06d',$id);
-        });
-        $form->text('name', '账号');
-      
-        $form->select('is_pass','审核')->options([
-            0 => '未审核',
-            1 => '通过',
-            2 => '拒绝'
-        ]);
-      
+        $form = new Form(new User);  
+        $form->number('invest_uid','邀请id'); 
+        $form->text('password','密码'); 
+        $form->mobile('phone','手机号');
+        $form->number('score','左钻'); 
         $form->saving(function (Form $form){
             //填写获取表单内容
             $this->beforePassStatus = $form->model()->is_pass;
