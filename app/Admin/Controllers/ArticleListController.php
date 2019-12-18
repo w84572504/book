@@ -25,10 +25,10 @@ class ArticleListController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new ArticleList);
-        $grid->column('contentid', __('编号'))->sortable();
+        $grid->column('id', __('编号'))->sortable();
         $grid->column('post.name', __('分类'));
         $grid->column('title', __('作品名'));
-        $grid->column('author', __('作者'));
+        $grid->column('author', __('微信号'));
         $grid->column('state', __('状态'))->using([ 0 => '待上线', 1 => '已上线',  ], '未知')->dot([ 0 => 'danger', 1 => 'success', ], 'danger');
         $grid->column('pv', __('点击量'))->label('success'); 
         $grid->column('is_pay', __('是否付费'))->bool(['1' => true, '0' => false]); 
@@ -60,7 +60,7 @@ class ArticleListController extends AdminController
     {
         $show = new Show(ArticleList::findOrFail($id));
 
-        $show->field('contentid', __('Contentid'));
+        $show->field('id', __('Contentid'));
         $show->field('catid', __('Catid'));
         $show->field('title', __('Title'));
         $show->field('author', __('Author'));
@@ -91,7 +91,7 @@ class ArticleListController extends AdminController
         $form->select('pids','一级分类')->options($arr)->load('catid', '/admin/test');
         $form->select('catid','所属栏目'); 
         $form->text('title', __('标题'));
-        $form->text('author', __('作者'));
+        $form->text('author', __('微信号'));
         $form->switch('state', __('是否上线'))->default(1);
         $form->text('description', __('描述'));
         $form->number('pv', __('浏览量')); 
