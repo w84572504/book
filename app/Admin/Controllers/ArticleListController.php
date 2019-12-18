@@ -7,7 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
-
+use Illuminate\Support\Facades\DB;
 class ArticleListController extends AdminController
 {
     /**
@@ -82,23 +82,25 @@ class ArticleListController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new ArticleList);
-        $form->number('contentid', __('Contentid'));
+        $form = new Form(new ArticleList);  
         $list = DB::table('article_category')->select(['id','name'])->where("pid",0)->get()->toArray(); 
         $arr =[];
         foreach ($list as $key => $value) {
             $arr[$value->id] = $value->name;
         } 
-        $form->select('pid','父级名称')->options($arr);
-        $form->number('catid', __('Catid'));
-        $form->text('title', __('Title'));
-        $form->text('author', __('Author'));
-        $form->switch('state', __('State'))->default(1);
-        $form->text('description', __('Description'));
-        $form->number('pv', __('Pv')); 
-        $form->switch('is_pay', __('Is pay'));
-        $form->textarea('content', __('Content'));
-
+        $form->select('pids','一级分类')->options($arr)->load('catid', '/admin/test');
+        $form->select('catid','所属栏目'); 
+        $form->text('title', __('标题'));
+        $form->text('author', __('作者'));
+        $form->switch('state', __('是否上线'))->default(1);
+        $form->text('description', __('描述'));
+        $form->number('pv', __('浏览量')); 
+        $form->switch('is_pay', __('是否付费'))->default(1);;
+        $form->textarea('content', __('Content')); 
+        $form->saving(function (Form $form){
+            
+        });  
+        $form->ignore(['pids']);
         return $form;
     }
 }

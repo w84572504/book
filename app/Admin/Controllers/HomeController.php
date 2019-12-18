@@ -12,6 +12,8 @@ use Encore\Admin\Widgets\Table;
 use Encore\Admin\Admin;
 use Illuminate\Support\Arr;
 use Encore\Admin\Widgets\Box;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     public function index(Content $content)
@@ -64,4 +66,15 @@ class HomeController extends Controller
                 });
             }); 
     } 
+    public function test(Request $request)
+    {
+        $provinceId = $request->get('q');
+        $list = DB::table('article_category')->select(['id','name'])->where("pid",$provinceId)->get()->toArray(); 
+        $arr =[];
+        foreach ($list as $key => $value) {
+            $arr[$key]['id'] = $value->id;
+            $arr[$key]['text'] = $value->name;
+        }  
+        return $arr;
+    }
 }
