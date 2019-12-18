@@ -5,6 +5,7 @@ namespace App\Models;
 use Encore\Admin\Traits\AdminBuilder;
 use Encore\Admin\Traits\ModelTree;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ArticleList;
 
 class ArticleCategory extends Model
 {
@@ -20,5 +21,9 @@ class ArticleCategory extends Model
     }
     public function getFaList(){
         $list = App\ArticleCategory::all();
+    }
+    public function comments()
+    {
+        return $this->hasMany(ArticleList::class,'catid');
     }
 }

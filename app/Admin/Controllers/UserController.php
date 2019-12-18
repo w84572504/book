@@ -36,6 +36,7 @@ class UserController extends Controller
             ->header('用户管理')
             ->body($this->detail($id));
     } 
+     
      public function edit($id, Content $content)
     {
         return $content
@@ -59,21 +60,19 @@ class UserController extends Controller
     {
         $grid = new Grid(new User);
         $grid->id('编号');
-        $grid->invest_uid("邀请人id");
+        $grid->invest_uid("邀请人编号");
         $grid->phone("手机号");
         $grid->wx_name("微信名");
+        $grid->column('wx_img', '头像')->image('',30,30);
         $grid->score("左钻");
         $grid->created_at("注册时间");
         $grid->filter(function($filter){
-
             // 去掉默认的id过滤器
             $filter->disableIdFilter();
-
             // 在这里添加字段过滤器
-            $filter->like('wx_name', '微信名'); 
-            $filter->like('phone', '手机号'); 
+            $filter->equal('wx_name', '微信名'); 
+            $filter->equal('phone', '手机号'); 
             $filter->like('created_at', "注册时间"); 
-
         });
         return $grid;
     }
@@ -86,12 +85,11 @@ class UserController extends Controller
      */
     protected function detail($id)
     {
-
         $show = new Show(User::findOrFail($id));
-
-        $show->invest_uid("邀请人id");
+        $show->invest_uid("邀请人编号");
         $show->phone("手机号");
         $show->wx_name("微信名");
+        $show->wx_img("头像");
         $show->score("左钻");
        
         return $show;
@@ -105,26 +103,16 @@ class UserController extends Controller
     protected function form()
     {
         $form = new Form(new User);  
-        $form->number('invest_uid','邀请id'); 
+        $form->number('invest_uid','邀请编号'); 
         $form->text('password','密码'); 
         $form->mobile('phone','手机号');
-        $form->number('score','左钻'); 
+        $form->text('wx_name','微信名'); 
+        $form->image('wx_img','头像');
+        $form->number('score','左钻');  
+        //保存前回调
         $form->saving(function (Form $form){
-            //填写获取表单内容
-            $this->beforePassStatus = $form->model()->is_pass;
-
-        });
-
-        $form->saved(function (Form $form){
-            //添加要判断及更改的字段
-            if($this->beforePassStatus != $form->model()->is_pass)
-            {
-                $checkedBy = Admin::user()->name;
-                $user = User::find($form->model()->id);
-                $user->checked_by = $checkedBy;
-                $user->save();
-            }
-        });
+            $form->password = md5($form->password); 
+        }); 
 
         return $form;
     } 
