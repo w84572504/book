@@ -1,5 +1,5 @@
 <?php
-
+use Encore\Admin\Facades\Admin;
 /**
  * Laravel-admin - admin builder based on Laravel.
  * @author z-song <https://github.com/z-song>
@@ -19,3 +19,17 @@
  */
 
 Encore\Admin\Form::forget(['map', 'editor']);
+
+Admin::navbar(function (\Encore\Admin\Widgets\Navbar $navbar) { 
+//     $navbar->right('<li>
+//     <a class="clear-cache" href="/admin/clear-cache">
+//       <i class="fa fa-trash"></i>
+//       <span>清理缓存</span>
+//     </a>
+// </li><li>
+//     <a href="javascript:void(0);" class="nav-fullscreen">
+//       <i class="fa fa-arrows-alt"></i>
+//     </a>
+// </li>');
+
+});

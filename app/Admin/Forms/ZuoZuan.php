@@ -26,7 +26,15 @@ class ZuoZuan extends Form
     {
         //dump($request->all());
 
-        admin_success('Processed successfully.');
+        $set = new Setting();
+        $input = $request->all(); 
+        foreach ($input as $key => $value) {  
+            $set->where('app', 'zuozuan')
+                ->where('var', $key)
+                ->update(['value' => $value]);
+            
+        } 
+        admin_success('修改配置成功！');
 
         return back();
     }
@@ -36,9 +44,13 @@ class ZuoZuan extends Form
      */
     public function form()
     {
-        $this->text('name')->rules('required');
-        $this->email('email')->rules('email');
-        $this->datetime('created_at');
+        $this->currency('5','5左钻需要金额')->symbol('￥');
+        $this->currency('10','10左钻需要金额')->symbol('￥');
+        $this->currency('20','20左钻需要金额')->symbol('￥');
+        $this->currency('50','50左钻需要金额')->symbol('￥');
+        $this->currency('100','100左钻需要金额')->symbol('￥');
+        $this->currency('200','200左钻需要金额')->symbol('￥'); 
+        $this->number('yq','邀请获得左钻');
     }
 
     /**
@@ -48,10 +60,13 @@ class ZuoZuan extends Form
      */
     public function data()
     {
-        return [
-            'name'       => 'John Doe',
-            'email'      => 'John.Doe@gmail.com',
-            'created_at' => now(),
-        ];
+        $set = new Setting();
+        $list = $set->select("*")->where("app","zuozuan")->get()->toArray(); 
+        $arr = [];
+        foreach ($list as $key => $value) {
+            $arr[$value['var']] = $value['value'];
+        }
+
+        return $arr;
     }
 }

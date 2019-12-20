@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ArticleCategory;
+use App\Models\ArticleZan;
 
 class ArticleList extends Model
 {
@@ -13,5 +14,9 @@ class ArticleList extends Model
     public function post()
     {
         return $this->belongsTo(ArticleCategory::class,'catid');
+    }
+    public function zan()
+    {
+        return $this->hasMany(ArticleZan::class,'aid')->where('article_zan.status',1);
     }
 }

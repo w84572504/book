@@ -16,7 +16,6 @@ Route::group([
     $router->resource('/setting', SettingController::class);
     $router->resource('/users', UserController::class);
     $router->resource('/score', UserScoreLogController::class);
-    $router->resource('/article_list', ArticleListController::class);
-    
+    $router->resource('/article_list', ArticleListController::class); 
 
 });
