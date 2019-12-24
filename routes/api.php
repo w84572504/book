@@ -12,7 +12,11 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+#登录 
+Route::get('login', 'Api\LoginController@index');  
 
-Route::get('/', function () {
-    return view('welcome');
+#应用页面
+Route::group(['middleware' =>'apiAuth'], function () {
+
+    Route::post('/index', 'Api\IndexController@index');
 });

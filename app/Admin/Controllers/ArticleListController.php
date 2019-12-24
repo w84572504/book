@@ -30,7 +30,10 @@ class ArticleListController extends AdminController
         $grid->column('title', __('作品名'));
         $grid->column('author', __('微信号'));
         $grid->column('state', __('状态'))->using([ 0 => '待上线', 1 => '已上线',  ], '未知')->dot([ 0 => 'danger', 1 => 'success', ], 'danger');
-        $grid->column('pv', __('点击量'))->label('success'); 
+        $grid->column('zan', __('点赞'))->display(function ($zan) {
+            $count = count($zan);
+            return $count;
+        })->label('success'); 
         $grid->column('is_pay', __('是否付费'))->bool(['1' => true, '0' => false]); 
         $grid->column('created_at', __('创建时间'))->sortable(); 
         $grid->filter(function($filter){ 
@@ -59,6 +62,7 @@ class ArticleListController extends AdminController
     protected function detail($id)
     {
         $show = new Show(ArticleList::findOrFail($id));
+<<<<<<< HEAD
 
         $show->field('id', __('Contentid'));
         $show->field('catid', __('Catid'));
@@ -68,6 +72,17 @@ class ArticleListController extends AdminController
         $show->field('pv', __('点击量'))->label();  
         $show->is_pay('是否付费')->using([ 0 => '否', 1 => '是',  ]);
         $show->content('内容');
+=======
+        $show->field('id', __('编号'));
+        $show->field('catid', __('所属栏目'));
+        $show->field('title', __('标题'));
+        $show->field('author', __('作者微信号'));
+        $show->field('state', __('状态'))->using([ 0 => '待上线', 1 => '已上线',  ], '未知');
+        $show->field('description', __('描述'));
+        $show->field('pv', __('点赞'))->display(function ($zan) { $count = count($zan); return $count; }) ;  
+        $show->field('is_pay', __('是否付费'))->using([ 0 => '否', 1 => '是',  ], '未知');
+        $show->field('content', __('内容'));
+>>>>>>> 12049f1ad9f423618c768d3ac5c89324b0e46314
         $show->field('created_at', __('创建时间'));
         $show->field('updated_at', __('更新时间'));
 
@@ -95,9 +110,14 @@ class ArticleListController extends AdminController
         $form->text('description', __('描述'));
         $form->number('pv', __('浏览量')); 
         $form->switch('is_pay', __('是否付费'))->default(1);;
+<<<<<<< HEAD
         $form->textarea('content', __('作品内容')); 
         $form->saving(function (Form $form){
             
+=======
+        $form->textarea('content', __('内容')); 
+        $form->saving(function (Form $form){ 
+>>>>>>> 12049f1ad9f423618c768d3ac5c89324b0e46314
         });  
         $form->ignore(['pids']);
         return $form;
