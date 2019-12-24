@@ -62,15 +62,14 @@ class ArticleListController extends AdminController
 
         $show->field('id', __('Contentid'));
         $show->field('catid', __('Catid'));
-        $show->field('title', __('Title'));
-        $show->field('author', __('Author'));
-        $show->field('state', __('State'));
-        $show->field('description', __('Description'));
-        $show->field('pv', __('Pv'));  
-        $show->field('is_pay', __('Is pay'));
-        $show->field('content', __('Content'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('title', __('标题'));
+        $show->field('author', __('作者'));
+        $show->state('状态')->using([ 0 => '待上线', 1 => '已上线',  ], '未知');
+        $show->field('pv', __('点击量'))->label();  
+        $show->is_pay('是否付费')->using([ 0 => '否', 1 => '是',  ]);
+        $show->content('内容');
+        $show->field('created_at', __('创建时间'));
+        $show->field('updated_at', __('更新时间'));
 
         return $show;
     }
@@ -96,7 +95,7 @@ class ArticleListController extends AdminController
         $form->text('description', __('描述'));
         $form->number('pv', __('浏览量')); 
         $form->switch('is_pay', __('是否付费'))->default(1);;
-        $form->textarea('content', __('Content')); 
+        $form->textarea('content', __('作品内容')); 
         $form->saving(function (Form $form){
             
         });  

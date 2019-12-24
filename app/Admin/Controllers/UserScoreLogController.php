@@ -25,7 +25,7 @@ class UserScoreLogController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new UserScoreLog); 
-        $grid->column('user_id', __('用户编号'));
+        $grid->column('user.wx_name', __('用户名'));
         $grid->column('score', __('消费左钻'));
         $grid->column('before', __('消费前'));
         $grid->column('after', __('消费后'));
@@ -37,7 +37,7 @@ class UserScoreLogController extends AdminController
             // 在这里添加字段过滤器
             $filter->like('user_id', '用户编号'); 
             $filter->like('memo', '作品编号'); 
-            $filter->like('created_at', "时间"); 
+            $filter->date('created_at', "时间"); 
         });
         return $grid;
     }

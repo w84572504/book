@@ -8,4 +8,9 @@ class UserScoreLog extends Model
 {
     //
     protected $table = 'user_score_log'; 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
 }
