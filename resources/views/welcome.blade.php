@@ -65,21 +65,11 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
+        <div class="flex-center position-ref full-height"> 
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1a2086e0c9b50d69&redirect_uri=http%3a%2f%2fwww.book.com&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect">Laravel</a>
                 </div>
 
                 <div class="links">
