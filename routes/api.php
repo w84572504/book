@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 #登录 
-Route::get('login', 'Api\LoginController@index');  
+Route::get('author', 'Api\AuthorController@index');  
 
 #应用页面
 Route::group(['middleware' =>'apiAuth'], function () {
