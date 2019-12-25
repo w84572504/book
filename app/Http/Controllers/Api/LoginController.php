@@ -13,4 +13,6 @@ class LoginController extends ApiBaseController
         $token = $auth->loginToken();
     	return $this->ok(['data'=>$token]);
     }
+    
+    
 }

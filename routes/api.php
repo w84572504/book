@@ -13,7 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 #登录 
-Route::get('author', 'Api\AuthorController@index');  
+Route::group(['middleware' =>'cors'], function () {
+
+   	Route::get('author', 'Api\AuthorController@index');  
+	Route::get('geturl', 'Api\AuthorController@geturl');  
+	Route::get('getopenid', 'Api\AuthorController@getopenid');  
+
+});
 
 #应用页面
 Route::group(['middleware' =>'apiAuth'], function () {
