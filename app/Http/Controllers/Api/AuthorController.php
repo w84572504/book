@@ -68,7 +68,7 @@ class AuthorController extends ApiBaseController
                $reurl = $this->re_url("",1); 
             }  
         }
-        return $this->ok(['url'=>$reurl,'token'=>$token,'status'=>$status,'replace'=>]);
+        return $this->ok(['url'=>$reurl,'token'=>$token,'status'=>$status,'replace'=>'']);
     }
     private function re_url($reurl,$type)
     {
@@ -76,7 +76,7 @@ class AuthorController extends ApiBaseController
         $re = $set->getType('wechat'); 
         $url = config("app.url").'/author';  
         $redirect_uri = urlencode($url);
-        // $redirect_uri = urlencode("http://192.168.7.111:8080/author");
+        $redirect_uri = urlencode("http://192.168.7.111:8080/author");
         $scope = $type ==1 ?  "snsapi_userinfo" : "snsapi_base";
         return "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$re['app_id']}&redirect_uri={$redirect_uri}&response_type=code&scope={$scope}&state=STATE#wechat_redirect"; 
     }
