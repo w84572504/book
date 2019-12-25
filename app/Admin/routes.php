@@ -16,12 +16,6 @@ Route::group([
     $router->resource('/setting', SettingController::class);
     $router->resource('/users', UserController::class);
     $router->resource('/score', UserScoreLogController::class);
-<<<<<<< HEAD
     $router->resource('/article_list', ArticleListController::class);
     $router->resource('/wxorder', WxOrderController::class);
-    
-=======
-    $router->resource('/article_list', ArticleListController::class); 
->>>>>>> 12049f1ad9f423618c768d3ac5c89324b0e46314
-
 });
