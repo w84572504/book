@@ -101,6 +101,7 @@ class ArticleListController extends AdminController
         $form->switch('is_pay', __('是否付费'))->default(1);
         $form->textarea('content', __('内容')); 
         $form->saving(function (Form $form){ 
+            
         });  
         $form->ignore(['pids']);
         return $form;
