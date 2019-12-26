@@ -8,6 +8,6 @@ class IndexController extends ApiBaseController
 {
     public function index(Request $request)
     {
-    	return $this->ok(['data'=>'ok']);
+    	return $this->ok(['data'=>'ok1']);
     }
 }
