@@ -22,7 +22,6 @@ class AccessControlAllowOrigin
         header("Access-Control-Allow-Headers: Content-Type, Accept, Authorization, X-Requested-With");
         header("Access-Control-Expose-Headers: *");
         header("Access-Control-Allow-Methods:post, GET, OPTIONS, PUT, DELETE, PATCH");
-
         return $next($request);
     }
 
