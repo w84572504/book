@@ -75,8 +75,11 @@ class AuthorController extends ApiBaseController
         $set = new Setting();
         $re = $set->getType('wechat'); 
         $url = config("app.url").'/author';  
-        $redirect_uri = urlencode($url);
-        $redirect_uri = urlencode("http://192.168.7.111:8080/author");
+        if (env('APP_NAME') == 'zuoxiang') {
+           $redirect_uri = urlencode($url);
+        }else{
+            $redirect_uri = urlencode("http://192.168.7.111:8080/author");
+        }
         $scope = $type ==1 ?  "snsapi_userinfo" : "snsapi_base";
         return "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$re['app_id']}&redirect_uri={$redirect_uri}&response_type=code&scope={$scope}&state=STATE#wechat_redirect"; 
     }
