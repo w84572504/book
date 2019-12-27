@@ -10,6 +10,7 @@
         "fideloper/proxy": "~3.3",
         "firebase/php-jwt": "^5.0",
         "laravel-admin-ext/chartjs": "^1.0",
+        "laravel-admin-ext/wang-editor": "^1.2",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "mews/captcha": "^3.0"
@@ -28,7 +29,10 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files":[
+            "app/Library/Util.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

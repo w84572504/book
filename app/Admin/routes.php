@@ -18,4 +18,5 @@ Route::group([
     $router->resource('/score', UserScoreLogController::class);
     $router->resource('/article_list', ArticleListController::class);
     $router->resource('/wxorder', WxOrderController::class);
+    $router->resource('banners', BannerController::class);
 });

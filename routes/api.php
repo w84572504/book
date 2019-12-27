@@ -24,4 +24,5 @@ Route::group(['middleware' =>'cors'], function () {
 #应用页面
 Route::group(['middleware' =>['cors','apiAuth']], function () {
     Route::post('/index', 'Api\IndexController@index');
+    Route::post('/getlist', 'Api\IndexController@getlist');
 });

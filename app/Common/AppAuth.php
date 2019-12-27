@@ -68,16 +68,8 @@ class AppAuth{
         $access_token = $token;
         $access_token['scopes'] = 'role_access'; //token标识，请求接口的token
         $access_token['nbf'] = $time; //表示当前时间1秒后才能使用
-        $access_token['exp'] = $time+7200; //access_token过期时间,这里设置2个小时
-
-        $refresh_token = $token;
-        $refresh_token['scopes'] = 'role_refresh'; //token标识，刷新access_token
-        $refresh_token['nbf'] = $time; //表示当前时间2小时后才能使用 提前一分钟为了 防止 网络传输过程时间过长造成 失效的问题
-        $refresh_token['exp'] = strtotime(date('Y-m-d 4:00:00',strtotime('+10 day'))); //access_token过期时间,这里设置7天 
-        $data = [
-            'access_token'=>jwt::encode($access_token,$this->secret,'HS256'),
-            'refresh_token'=>jwt::encode($refresh_token,$this->secret,'HS256'),
-        ];
+        $access_token['exp'] = strtotime(date('Y-m-d 4:00:00',strtotime('+1 day'))); //access_token过期时间,这里设置2个小时 
+        $data =  jwt::encode($access_token,$this->secret,'HS256');
         return $data;
     }
     //解密token

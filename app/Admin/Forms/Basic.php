@@ -54,6 +54,7 @@ class Basic extends Form
         $this->text('description','站点描述')->rules('required');
         $this->text('keywords','站点关键词')->rules('required'); 
         $this->text('icp','备案信息')->rules('required');  
+        $this->time('time','文章更新时间')->rules('required')->format('HH:mm');;  
         $this->text('phone','电话')->rules('required');  
         $this->text('email','邮箱')->rules('required');  
         $this->text('address','地址')->rules('required');  

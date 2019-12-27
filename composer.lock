@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b1d865027410f7e73edd3261c7aec36f",
+    "content-hash": "313ae9f7098ec2b9b5cf6588357ca3b9",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1022,6 +1022,59 @@
                 "laravel-admin"
             ],
             "time": "2018-09-16T17:28:26+00:00"
+        },
+        {
+            "name": "laravel-admin-ext/wang-editor",
+            "version": "v1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-admin-extensions/wangEditor.git",
+                "reference": "03952d6d98da9f6ea5fd57b3045111427fc5b052"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-admin-extensions/wangEditor/zipball/03952d6d98da9f6ea5fd57b3045111427fc5b052",
+                "reference": "03952d6d98da9f6ea5fd57b3045111427fc5b052",
+                "shasum": ""
+            },
+            "require": {
+                "encore/laravel-admin": ">=1.6",
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Encore\\WangEditor\\WangEditorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Encore\\WangEditor\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "song",
+                    "email": "zosong@126.com"
+                }
+            ],
+            "description": "wangEditor extension for laravel-admin",
+            "homepage": "https://github.com/laravel-admin-extensions/wangEditor",
+            "keywords": [
+                "editor",
+                "extension",
+                "laravel-admin"
+            ],
+            "time": "2019-12-24T02:03:10+00:00"
         },
         {
             "name": "laravel/framework",

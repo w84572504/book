@@ -99,7 +99,7 @@ class ArticleListController extends AdminController
         $form->text('description', __('描述'));
         $form->number('pv', __('浏览量')); 
         $form->switch('is_pay', __('是否付费'))->default(1);
-        $form->textarea('content', __('内容')); 
+        $form->editor('content', __('内容')); 
         $form->saving(function (Form $form){ 
             
         });  
