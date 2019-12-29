@@ -25,4 +25,5 @@ Route::group(['middleware' =>'cors'], function () {
 Route::group(['middleware' =>['cors','apiAuth']], function () {
     Route::post('/index', 'Api\IndexController@index');
     Route::post('/getlist', 'Api\IndexController@getlist');
+    Route::post('/changezan', 'Api\IndexController@changezan');
 });

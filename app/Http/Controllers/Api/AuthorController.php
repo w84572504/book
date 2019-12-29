@@ -21,7 +21,8 @@ class AuthorController extends ApiBaseController
     }
     public function getopenid(Request $request)
     {
-        $code = $request->input("code",0);
+        $code = $request->input("code",0); 
+        $yid = $request->input("yid",0); 
         $set = new Setting();
         $re = $set->getType('wechat');
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$re['app_id']}&secret={$re['app_secret']}&code={$code}&grant_type=authorization_code";
@@ -55,12 +56,30 @@ class AuthorController extends ApiBaseController
                 );
             $body = json_decode($body, true);
             $dataIn=[ 
+                'invest_uid' => $yid,
                 "wx_name"=>$body['nickname'],
                 "wx_id"=>$body['openid'],  
                 "wx_img"=>$body['headimgurl'],
                 "score"=>0, 
             ];
             $id = DB::table("user")->insertGetId($dataIn); 
+            if ($id) {
+                $yuser = DB::table("user")->select("*")->where("id",$yid)->first();
+                $re = $set->getType('zuozuan');
+                $newscore = $yuser->score+$re['yq'];
+                DB::table("user")->where("id",$yid)->update(['score'=>$newscore]);
+                $scoreData=[ 
+                    'user_id' => $yid,
+                    "score"=>$re['yq'],
+                    "before"=>$yuser->score,  
+                    "after"=>$newscore,
+                    "memo"=>0, 
+                    'created_at'=>date("Y-m-d h:i:s"),
+                    'updated_at'=>date("Y-m-d h:i:s"),
+                    
+                ];
+                DB::table("user_score_log")->insertGetId($scoreData);
+            }
             $auth = new AppAuth('',$id); 
             $token = $auth->loginToken(); 
             $status=1;
@@ -74,11 +93,12 @@ class AuthorController extends ApiBaseController
     {
         $set = new Setting();
         $re = $set->getType('wechat'); 
-        $url = config("app.url").'/author';  
+        $url = config("app.url").'/author'.$reurl;  
         if (env('APP_NAME') == 'zuoxiang') {
            $redirect_uri = urlencode($url);
-        }else{
-            $redirect_uri = urlencode("http://192.168.7.111:8080/author");
+        }else{ 
+            $urls = "http://192.168.1.102:8080/author?url=".$reurl;
+            $redirect_uri = urlencode($urls);
         }
         $scope = $type ==1 ?  "snsapi_userinfo" : "snsapi_base";
         return "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$re['app_id']}&redirect_uri={$redirect_uri}&response_type=code&scope={$scope}&state=STATE#wechat_redirect"; 

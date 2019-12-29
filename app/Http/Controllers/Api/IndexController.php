@@ -39,4 +39,13 @@ class IndexController extends ApiBaseController
     			->get();
     	return $this->ok(['data'=>$list]);
     }
+    public function changezan(Request $request)
+    {
+        # 点赞
+        $id  = $request->input("id",0);
+        $status = $request->input("status",0);
+        $uid = $request->input("uid",0);
+        $re = DB::table("article_zan")->updateOrInsert(['uid' => $uid, 'aid' => $id],['status' => $status]);
+        return $this->ok(['msg'=>'成功！']);
+    }
 }
