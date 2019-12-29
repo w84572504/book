@@ -26,7 +26,7 @@ class IndexController extends ApiBaseController
     	$times = gettimes($re['time']); 
     	$id = $request->input("id",0);
     	$uid = $request->input("uid",0); 
-    	$list = DB::table('article_list')->select(DB::raw('article_list.id,article_list.content,article_list.title,ifnull(article_zan.status,0) as zan'))
+    	$list = DB::table('article_list')->select(DB::raw('article_list.id,article_list.content,article_list.description,article_list.title,ifnull(article_zan.status,0) as zan'))
     			->join('article_zan',function($join) use($uid){
 					$join->on('article_list.id', '=', 'article_zan.aid')
 					->where('article_zan.uid',"=",$uid);
