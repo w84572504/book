@@ -12,5 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return "网站开发中。。。";
 });

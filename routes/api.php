@@ -27,4 +27,5 @@ Route::group(['middleware' =>['cors','apiAuth']], function () {
     Route::post('/getlist', 'Api\IndexController@getlist');
     Route::post('/changezan', 'Api\IndexController@changezan');
     Route::post('/wxconfig', 'Api\WechatController@config');
+    Route::post('/shareimg', 'Api\WechatController@shareimg');
 });

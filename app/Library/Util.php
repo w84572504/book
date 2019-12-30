@@ -22,3 +22,12 @@ function gettimes($hour)
     	}
     	return $array;
     }
+function DeleteHtml($str)
+{
+    $str = trim($str); //清除字符串两边的空格
+    $str = preg_replace("/<\/br( )+(\/)?>/","###",$str); //保留换行
+    $str = preg_replace("/<\/p>/","###",$str); //将</p>替换成换行
+    $str = strip_tags($str);
+    $str = preg_replace("/###/","\n",$str);
+    return trim($str); //返回字符串
+}
