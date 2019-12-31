@@ -39,9 +39,13 @@ class WechatController extends ApiBaseController
             return $this->ok(['img'=>$baseurl.'/upload/'.$filename]);
         }
         $text = DeleteHtml($text);
-        $textarr = explode("\n",$text);
+        $textarr = explode("|",$text);
         if (count($textarr) > 2) {
             $text = $textarr[0]."\n\n".$textarr[1];
+        }
+        $con = "";
+        foreach ($textarr as $value) {
+            $con .= $value."\n\n";
         }
         $title =  $request->input("title",0);
         $title = DeleteHtml($title);
@@ -58,7 +62,7 @@ class WechatController extends ApiBaseController
         $config = array(
             'text'=>array(
                     array(
-                        'text'=>$text,
+                        'text'=>$con,
                         'left'=>100,
                         'top'=>700,
                         'fontPath'=>$font, //字体文件

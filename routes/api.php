@@ -23,9 +23,18 @@ Route::group(['middleware' =>'cors'], function () {
 
 #应用页面
 Route::group(['middleware' =>['cors','apiAuth']], function () {
+	#首页
     Route::post('/index', 'Api\IndexController@index');
+    #获取列表
     Route::post('/getlist', 'Api\IndexController@getlist');
+    #点赞
     Route::post('/changezan', 'Api\IndexController@changezan');
+    #付费获取文章
+    Route::post('/getmore', 'Api\IndexController@getmore');
+    #用户信息
+    Route::post('/uinfo', 'Api\IndexController@uinfo');
+    #微信分享配置
     Route::post('/wxconfig', 'Api\WechatController@config');
+    #分享图片
     Route::post('/shareimg', 'Api\WechatController@shareimg');
 });

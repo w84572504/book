@@ -35,10 +35,10 @@ class ArticleCategoryController extends Controller
         foreach ($list as $key => $value) {
             $arr[$value->id] = $value->name;
         } 
-        $form->select('pid','父级名称')->options($arr);
-        $form->text('name','名称');
-        $form->number('sort', '排序');
-        $form->switch('state', '显示开启');
+        $form->select('pid','父级名称')->options($arr)->required();
+        $form->text('name','名称')->required();
+        $form->number('sort', '排序')->required();
+        $form->switch('state', '显示开启')->required();
         $form->display('created_at', '创建时间');
         $form->display('updated_at', '修改时间');
         return $form;

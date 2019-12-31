@@ -30,7 +30,7 @@ class BannerController extends AdminController
         $grid->column('url', __('地址')); 
         $grid->column('img', __('图片'))->image('',100,60); 
         $grid->column('sort', __('排序'));
-        $grid->column('status', __('状态'))->using([ 0 => '待上线', 1 => '已上线',  ], '未知')->dot([ 0 => 'danger', 1 => 'success', ], 'danger');; 
+        $grid->column('status', __('状态'))->using([ 0 => '待上线', 1 => '已上线',  ], '未知')->dot([ 0 => 'danger', 1 => 'success', ], 'danger');
         return $grid;
     }
 
@@ -63,8 +63,8 @@ class BannerController extends AdminController
         $form = new Form(new Banner);
 
         $form->url('url','地址');
-        $form->image('url','头像');
-        $form->number('sort', __('排序'));
+        $form->image('url','图片')->required();
+        $form->number('sort', __('排序'))->required();
         $form->switch('status', __('状态'))->default(1);
 
         return $form;

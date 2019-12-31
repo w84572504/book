@@ -51,6 +51,7 @@ class ZuoZuan extends Form
         $this->currency('100','100左钻需要金额')->symbol('￥');
         $this->currency('200','200左钻需要金额')->symbol('￥'); 
         $this->number('yq','邀请获得左钻');
+        $this->number('payzz','查看文章消费左钻');
     }
 
     /**
